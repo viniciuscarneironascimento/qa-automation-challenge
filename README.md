@@ -2,7 +2,7 @@
 Desafio de automação de controle de qualidade do SAFE Labs
 
 # Objetivo: 
-Desenvolver um projeto de automação para apreciação das técnicas aplicadas pelos avaliadores da ISH.
+Desenvolver um projeto de automação para apreciação das técnicas aplicadas.
 
 # Planejamento: 
 1- Levantar os requisitos de softwares necessários para a instalação e configuração do framework de automação;
@@ -11,9 +11,9 @@ Desenvolver um projeto de automação para apreciação das técnicas aplicadas 
 
 3- Identificar os requisitos e critérios de aceite;
 
-4- Planejar os cenários de testes com base nos requisitos;
+4- Planejar os cenários de testes com base nos requisitos e escrevê-los em Gherkin;
 
-5- Criar scripts automatizados.
+5- Criar scripts automatizados no Cypress.
 
 
 
