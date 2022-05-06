@@ -1,0 +1,14 @@
+{
+  "name": "qa-automation-challenge",
+  "version": "1.0.0",
+  "description": "Desafio de automação de controle de qualidade do SAFE Labs",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx cypress open"
+  },
+  "author": "Vinicius Carneiro Nascimento",
+  "license": "MIT",
+  "devDependencies": {
+    "cypress": "^9.6.0"
+  }
+}
