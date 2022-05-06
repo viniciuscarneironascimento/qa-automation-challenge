@@ -61,7 +61,7 @@ describe('Perform Registration feature', ()=>{
         CreateAccountPage.email().should('have.value', 'teste05052022@gmail.com');
     })
 
-    /* 
+    /*  
  Scenario: Criar conta com sucesso
     Give que acessei o formulário de cadastro
     When informar os campos obrigatórios
