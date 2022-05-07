@@ -49,7 +49,7 @@ No arquivo package.json, na seção dependencias, conferir se o cypress foi adic
 
 5- Antes de enviar para o repositório remoto, criar o arquivo ".gitignore" e incluir a pasta "NODE_MODULES" para que não seja adicionada nos commits.
 
-6- Necessário instalar a biblioteca Faker para gerar dados dinâmicos. Usar o comando abaixo no terminal:
+6- Necessário instalar a biblioteca Faker para gerar dados dinâmicos. Usar o comando no terminal:
 npm install faker@5.5.3 --save-dev
 
 
