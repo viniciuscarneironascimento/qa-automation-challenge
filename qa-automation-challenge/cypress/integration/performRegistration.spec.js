@@ -1,14 +1,32 @@
+import Header from "../support/pageObjects/Header";
 import HomePage from "../support/pageObjects/HomePage";
 import AuthenticationPage from "../support/pageObjects/AuthenticationPage";
 import CreateAccountPage from "../support/pageObjects/CreateAccountPage";
+import MyAccountPage from "../support/pageObjects/MyAccountPage";
 
 describe('Perform Registration feature', ()=>{
 
     const url = Cypress.config("baseUrl");
+    const faker = require('faker');
+    const firstName = faker.name.firstName();
+    const lastName = faker.name.lastName();
+    const email = faker.internet.email(firstName);
+
+    const cliente = {
+            userName: `${firstName} ${lastName}`,
+            firstName: `${firstName}`,
+            lasttName: `${lastName}`,
+            password: '12345',
+            adress1: 'Rua A',
+            city: 'Alagoinhas',
+            state: 'Florida',
+            codePostal: '12345',
+            phoneMobile: '11 99999999'
+    }
 
     before('Background: Give que usuário esteja na tela de autenticação', ()=>{
         HomePage.go(url);
-        HomePage.btnLogin().click();
+        Header.btnLogin().click();
         AuthenticationPage.pageHeading().should('have.text', 'Authentication');
     })
 
@@ -33,7 +51,6 @@ describe('Perform Registration feature', ()=>{
     })
 
     it('Scenario: Tentar criar conta com e-mail já cadastrado', ()=>{
-      
         // When informar e-mail já cadastrado
         AuthenticationPage.clearEmail();
         AuthenticationPage.email('teste@teste.com');
@@ -46,10 +63,9 @@ describe('Perform Registration feature', ()=>{
     })
 
     it('Scenario: Acessar formulário de cadastro', ()=>{
-      
         // When informar e-mail válido ainda não cadastrado
         AuthenticationPage.clearEmail();
-        AuthenticationPage.email('teste05052022@gmail.com');
+        AuthenticationPage.email(email);
 
         // And clicar no botão criar uma conta
         AuthenticationPage.btnCreareAccount().click();
@@ -58,16 +74,44 @@ describe('Perform Registration feature', ()=>{
         CreateAccountPage.titleCreateAccount().should('have.text', 'Create an account');
 
         // And o campo e-mail preenchido com o e-mail informado
-        CreateAccountPage.email().should('have.value', 'teste05052022@gmail.com');
+        CreateAccountPage.email().should('have.value', email);
+        Header.btnLogin().click();
     })
 
-    /*  
- Scenario: Criar conta com sucesso
-    Give que acessei o formulário de cadastro
-    When informar os campos obrigatórios
-    And clicar no botão registrar
-    Ten o sistema realiza o cadastro com sucesso
-    And redireciona para a página minha conta*/
+    it('Scenario: Validar campos obrigatórios do formulário', ()=>{
+        // Give que acessei o formulário de cadastro
+        AuthenticationPage.clearEmail();
+        AuthenticationPage.email(email);
+        AuthenticationPage.btnCreareAccount().click();
+        CreateAccountPage.titleCreateAccount().should('have.text', 'Create an account');
+        CreateAccountPage.email().should('have.value', email);
 
+        // When clicar no botão registrar sem informar os campos obrigatórios
+        CreateAccountPage.btnRegister().click();
 
+        // Ten o sistema exibe mensagem "There are 8 errors"
+        CreateAccountPage.msgError().should('contain.text', 'There are 8 errors');
+        Header.btnLogin().click();
+    })
+
+    it('Scenario: Criar conta com sucesso', ()=>{
+        // Give que acessei o formulário de cadastro
+        AuthenticationPage.clearEmail();
+        AuthenticationPage.email(email);
+        AuthenticationPage.btnCreareAccount().click();
+        CreateAccountPage.titleCreateAccount().should('have.text', 'Create an account');
+        CreateAccountPage.email().should('have.value', email);
+
+        // When informar os campos obrigatórios
+        CreateAccountPage.fillForm(cliente);
+
+        // And clicar no botão registrar
+        CreateAccountPage.btnRegister().click();
+
+        // Ten o sistema realiza o cadastro com sucesso
+        Header.nameUserLogged().should('have.text', cliente.userName);
+
+        //  And redireciona para a página minha conta
+        MyAccountPage.titleMyAccount().should('have.text', 'My account');
+    })
 })

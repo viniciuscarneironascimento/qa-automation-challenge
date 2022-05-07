@@ -26,6 +26,11 @@ Scenario: Acessar formulário de cadastro
     Ten o sistema redireciona para a tela de cadastro da conta
     And o campo e-mail preenchido com o e-mail informado
 
+Scenario: Validar campos obrigatórios do formulário
+    Give que acessei o formulário de cadastro
+    When clicar no botão registrar sem informar os campos obrigatórios
+    en o sistema exibe mensagem "There are 8 errors"
+
 Scenario: Criar conta com sucesso
     Give que acessei o formulário de cadastro
     When informar os campos obrigatórios

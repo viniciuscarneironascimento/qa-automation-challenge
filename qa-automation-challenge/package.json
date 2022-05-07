@@ -9,6 +9,7 @@
   "author": "Vinicius Carneiro Nascimento",
   "license": "MIT",
   "devDependencies": {
-    "cypress": "^9.6.0"
+    "cypress": "^9.6.0",
+    "faker": "^5.5.3"
   }
 }
