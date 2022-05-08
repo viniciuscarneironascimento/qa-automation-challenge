@@ -35,37 +35,37 @@ describe('Perform Registration feature', ()=>{
         AuthenticationPage.btnCreareAccount().click();
 
         // Ten o sistema exibe mensagem "Invalid email address." 
-        AuthenticationPage.msgError().should('have.text', 'Invalid email address.');
+        AuthenticationPage.msgErrorCreateAccount().should('have.text', 'Invalid email address.');
     })
 
     it('Scenario: Tentar criar conta com e-mail inválido', ()=>{
         // When informar e-mail inválido
         AuthenticationPage.clearEmail();
-        AuthenticationPage.email('teste#teste.com');
+        AuthenticationPage.emailCreate('teste#teste.com');
 
         // And clicar no botão criar uma conta
         AuthenticationPage.btnCreareAccount().click();
 
         // Ten o sistema exibe mensagem "Invalid email address." 
-        AuthenticationPage.msgError().should('have.text', 'Invalid email address.');
+        AuthenticationPage.msgErrorCreateAccount().should('have.text', 'Invalid email address.');
     })
 
     it('Scenario: Tentar criar conta com e-mail já cadastrado', ()=>{
         // When informar e-mail já cadastrado
         AuthenticationPage.clearEmail();
-        AuthenticationPage.email('teste@teste.com');
+        AuthenticationPage.emailCreate('teste@teste.com');
 
         // And clicar no botão criar uma conta
         AuthenticationPage.btnCreareAccount().click();
 
         // Ten o sistema exibe mensagem "An account using this email address has already been registered. Please enter a valid password or request a new one. "
-        AuthenticationPage.msgError().should('have.text', 'An account using this email address has already been registered. Please enter a valid password or request a new one. ');
+        AuthenticationPage.msgErrorCreateAccount().should('have.text', 'An account using this email address has already been registered. Please enter a valid password or request a new one. ');
     })
 
     it('Scenario: Acessar formulário de cadastro', ()=>{
         // When informar e-mail válido ainda não cadastrado
         AuthenticationPage.clearEmail();
-        AuthenticationPage.email(email);
+        AuthenticationPage.emailCreate(email);
 
         // And clicar no botão criar uma conta
         AuthenticationPage.btnCreareAccount().click();
@@ -81,7 +81,7 @@ describe('Perform Registration feature', ()=>{
     it('Scenario: Validar campos obrigatórios do formulário', ()=>{
         // Give que acessei o formulário de cadastro
         AuthenticationPage.clearEmail();
-        AuthenticationPage.email(email);
+        AuthenticationPage.emailCreate(email);
         AuthenticationPage.btnCreareAccount().click();
         CreateAccountPage.titleCreateAccount().should('have.text', 'Create an account');
         CreateAccountPage.email().should('have.value', email);
@@ -97,7 +97,7 @@ describe('Perform Registration feature', ()=>{
     it('Scenario: Criar conta com sucesso', ()=>{
         // Give que acessei o formulário de cadastro
         AuthenticationPage.clearEmail();
-        AuthenticationPage.email(email);
+        AuthenticationPage.emailCreate(email);
         AuthenticationPage.btnCreareAccount().click();
         CreateAccountPage.titleCreateAccount().should('have.text', 'Create an account');
         CreateAccountPage.email().should('have.value', email);
@@ -113,5 +113,7 @@ describe('Perform Registration feature', ()=>{
 
         //  And redireciona para a página minha conta
         MyAccountPage.titleMyAccount().should('have.text', 'My account');
+        MyAccountPage.msgWelcome().should('have.text', 'Welcome to your account. Here you can manage all of your personal information and orders.');
+        Header.signOut().should('be.visible');
     })
 })

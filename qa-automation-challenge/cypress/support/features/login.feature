@@ -7,17 +7,12 @@ Background:
    Give que o usuário possua conta no sistema
    And esteja na tela de autenticação
 
-Scenario: Login com sucesso
-    And preenche suas credenciais com dados válidos
-    When acionar o botão Sign in
-    Ten o sistema redireciona para a página inicial de usuário logado
-
 Scenario: Login sem informarr credenciais
     And não informarr suas credenciais
     When acionar o botão Sign in
     Ten é exibida a mensagem "An email address required."
 
-Scenario: Login sem informarr senha
+Scenario: Login sem informar senha
     And informar e-mail válido
     And não informar senha
     When acionar o botão Sign in
@@ -41,8 +36,7 @@ Scenario: Login com e-mail não cadastrado
     When acionar o botão Sign in
     Ten é exibida a mensagem "Authentication failed."
 
-Scenario: Login com e-mail cadastrado em maiúscula
-    And informar e-mail válido em maiúscula
-    And informar senha válida
+Scenario: Login com sucesso
+    And preenche suas credenciais com dados válidos
     When acionar o botão Sign in
-    Ten é exibida a mensagem "Authentication failed."
+    Ten o sistema redireciona para a página inicial de usuário logado
