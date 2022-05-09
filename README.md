@@ -52,4 +52,9 @@ No arquivo package.json, na seção dependencias, conferir se o cypress foi adic
 6- Necessário instalar a biblioteca Faker para gerar dados dinâmicos. Usar o comando no terminal:
 npm install faker@5.5.3 --save-dev
 
+7- Postman: Foi necessário a instalação do Postman.
 
+8- API Spotify
+Também fopi necessário criar conta no Spotify para acessar a API https://developer.spotify.com/dashboard/login
+Dentre as configurações necessárias, destaco configuração do scopo: 
+Scope: playlist-modify-public playlist-modify-private playlist-read-private user-library-read
