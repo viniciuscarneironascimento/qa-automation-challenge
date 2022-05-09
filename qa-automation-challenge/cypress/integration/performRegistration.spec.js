@@ -24,6 +24,17 @@ describe('Perform Registration feature', ()=>{
             phoneMobile: '11 99999999'
     }
 
+    const todosTitles = [
+    'You must register at least one phone number.',
+    'lastname is required.',
+    'firstname is required.',
+    'passwd is required.',
+    'address1 is required.',
+    'city is required.',
+    "The Zip/Postal code you've entered is invalid. It must follow this format: 00000",
+    'This country requires you to choose a State.'
+    ]
+
     before('Background: Give que usuário esteja na tela de autenticação', ()=>{
         HomePage.go(url);
         Header.btnLogin().click();
@@ -91,6 +102,10 @@ describe('Perform Registration feature', ()=>{
 
         // Ten o sistema exibe mensagem "There are 8 errors"
         CreateAccountPage.msgError().should('contain.text', 'There are 8 errors');
+
+        cy.get('.alert ol li').each( (item, index) => {
+            cy.wrap(item).should('contain.text', todosTitles[index])
+        })
         Header.btnLogin().click();
     })
 

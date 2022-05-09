@@ -24,9 +24,9 @@ class AuthenticationPage {
         return cy.get('#email_create').clear();
     }
     
-    emailCreate(email) {
-        return cy.get('#email_create').type(email);
-    }
+        emailCreate(email) {
+            return cy.get('#email_create').type(email);
+        }
 
     emailLogin(email) {
         return cy.get('#email').type(email);
